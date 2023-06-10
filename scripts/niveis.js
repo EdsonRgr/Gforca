@@ -7,13 +7,6 @@ const btnDificil = document.getElementById('btnDificil')
 
 const moedasPefil = document.getElementById('moedasPefil')
 
-let palavra
-let tema
-let dicas
-
-
-const btnVoltar = document.getElementById('btnVoltar')
-
 showLoading()
 firebase.auth().onAuthStateChanged((user) => {
     const uid = user.uid;
@@ -41,44 +34,27 @@ firebase.auth().onAuthStateChanged((user) => {
   });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function voltar(){
     window.location.href = "index.html";
 }
 
+
+
+
 btnFacil.addEventListener('click' , ()=>{
-  // getRandomWordWithTips()
-  //   palavra = dWord
-  //   tema = dTheme
-  //   dicas = dHint
-
-  //   console.log(palavra , tema , dicas)
-
+ 
+    
     window.location.href = "match.html";
   })
 
   btnMedio.addEventListener('click' , ()=>{
-
-
+    
     window.location.href = "match.html";
   })
 
   btnDificil.addEventListener('click' , ()=>{
 
-
-
     window.location.href = "match.html";
   })
+
+  

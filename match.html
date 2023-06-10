@@ -12,7 +12,7 @@
 		<div class="header">
 			<div class="moedas">
 				<img src="images/icon_moedas1.png">
-				<p id="perfilMoedas">550</p>
+				<p id="perfilMoedas">-</p>
 			</div>	
 			
 			<div class="difficult">
@@ -32,7 +32,7 @@
 		<div class="players">
 
 			<div class="player1">
-				<h1 id="perfilNome"> p1 -</h1>
+				<h1 id="perfilNome">-</h1>
 				 <img src="images/perfilPlayer1.png">
 				<input id="checkboxPlayer1" type="checkbox">
 				<h1 id="readyP1"> Aguardando... </h1>
@@ -59,12 +59,13 @@
 	</div>
 
 
-		<script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-app-compat.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-auth-compat.js"></script>
-		<script src="scripts/firebase-init.js"></script>
-		<script src="scripts/auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-auth-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore-compat.js"></script>
+	<script src="scripts/firebase-init.js"></script>
+	<script src="scripts/auth.js"></script>
 		
 
-		<script src="scripts/match.js"></script>
+		<script src="scripts/match.js" type="module"></script>
 </body>
 </html>

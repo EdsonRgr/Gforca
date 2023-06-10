@@ -12,11 +12,21 @@ showLoading();
       const timeElement = document.getElementById("time");
       let countdown = 30; // Contagem regressiva de 30 segundos
       let countdownInterval; // Referência para o intervalo da contagem regressiva
+    console.log(wordsWithTips)
+    
+    const nivelDesejado  = 3
+    
+    const palavrasNivelDesejado = wordsWithTips.filter(word => word.nivel === nivelDesejado);
+    console.log(palavrasNivelDesejado)
 
-    const randomWord = wordsWithTips[Math.floor(Math.random() * wordsWithTips.length)];
-    const dWord = randomWord.word.toUpperCase();
+    const randomWord = palavrasNivelDesejado[Math.floor(Math.random() * palavrasNivelDesejado.length)];
+    console.log(randomWord)
+
+    const dWord = randomWord.word.toUpperCase().replace(/\s/g, '').normalize('NFD').replace(/[\u0300-\u0366\u0368-\u036F]/g, '');
+    
     const dTheme = randomWord.theme.toUpperCase()
     const dTips =  randomWord.tips[0].nameTips
+    
 
     console.log(dWord)
 
@@ -31,6 +41,10 @@ showLoading();
     // Inicializa a palavra oculta com underscores
     let hiddenWord = Array(wordLetters.length).fill(" ");
     
+
+    console.log(hiddenWord)
+    
+
     function drawHiddenWord() {
       hiddenWordElement.innerHTML = ""; // Limpa o conteúdo anterior
     
@@ -415,7 +429,7 @@ showLoading();
               const partidasGanhas = data.partidasGanhas;
               const partidasPerdidas = data.partidasPerdidas
               
-             
+              
 
               moedasPerfil.innerHTML = moedas
               dPlayer1.innerHTML = "Player 1 - " + nome
