@@ -7,32 +7,51 @@
 	<title>Match</title>
 </head>
 <body>
-	<div class="container">
-		<div class="idSession">
-			<h1>ID:#####</h1>
-		</div>
-		<div class="players">
-			<div class="player1">
-				<div class="perfilCirculo1">
-					<div class="trigulo1"></div>
-				</div>
-				<button id="btnPronto1">Pronto</button>
+	<div class="content">
 
-				<div class="check">
-					<input id="checkbox1" type="checkbox" disabled>
-				</div>
+		<div class="header">
+			<div class="moedas">
+				<img src="images/icon_moedas1.png">
+				<p id="perfilMoedas">550</p>
+			</div>	
+			
+			<div class="difficult">
+				<h1>Difilcudade</h1>
+				<h2 id="difilcudade">Médio</h2>
+			</div>
+
+			<div class="btnSair">
+				<button id="btnSair" onclick="sair()"> 
+					sair
+					<img src="images/stickman.png">
+				</button>
+			</div>
+		</div>
+
+		
+		<div class="players">
+
+			<div class="player1">
+				<h1 id="perfilNome"> p1 -</h1>
+				 <img src="images/perfilPlayer1.png">
+				<input id="checkboxPlayer1" type="checkbox">
+				<h1 id="readyP1"> Aguardando... </h1>
+			</div>
+
+			<div class="premio">
+				<p id="vs">VS</p>
+				<h1>Prêmio</h1>
+				<p id="valorPartida">500</p>
+				<img src="images/icon_moedas1.png">
 			</div>
 
 			<div class="player2">
-				<div class="perfilCirculo2">
-					<div class="trigulo2"></div>
-				</div>
-				<button id="btnPronto2">Pronto</button>
-
-				<div class="check">
-					<input id="checkbox2" type="checkbox" disabled>
-				</div>
+				<h1 id="perfilNome"> p2 -</h1>
+				 <img src="images/perfilPlayer2.png">
+				<input id="checkboxPlayer2" type="checkbox">
+				<h1 id="readyP2"> Aguardando... </h1>
 			</div>
+
 		</div>
 
 

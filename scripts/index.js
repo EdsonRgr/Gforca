@@ -1,7 +1,7 @@
 const buttonCrud = document.getElementById('crud')
 const buttonGame = document.getElementById('buttonGame')
 
-const usersRef = firebase.firestore().collection("users");
+
 
 //const themeRef = firebase.firestore().collection("theme");
 
@@ -15,7 +15,11 @@ const emailPerfil = document.getElementById('emailPerfil')
 const nomePerfil = document.getElementById('nomePerfil')
 const moedasPerfil = document.getElementById('moedasPerfil')
 const partidasGanhasPerfil = document.getElementById('partidasGanhasPerfil')
+
+
 const auth = firebase.auth();
+const usersRef = firebase.firestore().collection("users");
+
 // showLoading()
 // setTimeout(()=>{
 //   hideLoading()
@@ -51,8 +55,6 @@ firebase.auth().onAuthStateChanged((user) => {
               if(profile == "admin"){
                 buttonGameDiv.classList.add("hide");
                 buttonCrudDiv.classList.remove("hide");
-                
-                console.log("aqui", profile=="admin")
               }else{
                 buttonGameDiv.classList.remove("hide");
                 buttonCrudDiv.classList.add("hide");
@@ -194,12 +196,7 @@ function adicionarMoedasUsuario(valorMoedas) {
           reloadPage();
           console.log('Moedas adicionadas com sucesso');
       }, 2000);
-        
-        // ocultarModalConfirmacao()
-        // ocultarModal()
-        // const moedasAtuais = parseInt(moedasPerfil.innerHTML)
-        // moedasPerfil.innerHTML = (moedasAtuais+valorMoedas).toString()
-        // hideLoading()
+            
       })
       .catch((error) => {
           console.error('Erro ao adicionar moedas:', error);
