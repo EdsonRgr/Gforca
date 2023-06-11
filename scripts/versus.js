@@ -3,33 +3,81 @@
   const hiddenWordElement = document.getElementById("hidden-word");
 
   const usersRef = firebase.firestore().collection("users");
-  const auth = firebase.auth();
+  // const auth = firebase.auth();
 
 showLoading();
- fetchWordsWithTips()
-    .then(() => {
-      
-      const timeElement = document.getElementById("time");
-      let countdown = 30; // Contagem regressiva de 30 segundos
-      let countdownInterval; // Referência para o intervalo da contagem regressiva
-    console.log(wordsWithTips)
-    
-    const nivelDesejado  = 3
-    
-    const palavrasNivelDesejado = wordsWithTips.filter(word => word.nivel === nivelDesejado);
-    console.log(palavrasNivelDesejado)
+ 
 
+    const timeElement = document.getElementById("time");
+    let countdown = 30; // Contagem regressiva de 30 segundos
+    let countdownInterval; // Referência para o intervalo da contagem regressiva
+
+    const arrayObj = [
+      { nivel: 3, theme: 'tecnologia', word: 'criptomoedas', tips: [
+        { id: 'KEbR0i85A9avVyMrQ6nA', nameTips: 'segurança nas transações' },
+        { id: 'NcI1U7m1qHlxKN5MbUvz', nameTips: 'moeda digital descentralizada' }
+      ] },
+      { nivel: 3, theme: 'natureza', word: 'desertos', tips: [
+        { id: 'kAaONjwcKEU088jbf6Nz', nameTips: 'climas áridos e secos' }
+      ] },
+      { nivel: 3, theme: 'natureza', word: 'florestas', tips: [
+        { id: 'LeLKTgfwrMfy4SKL4iO4', nameTips: 'pulmão do planeta' }
+      ] },
+      { nivel: 1, theme: 'natureza', word: 'rios', tips: [
+        { id: 'TJSQAgCXGqcr04XA5pva', nameTips: 'transporte e geração de energia' }
+      ] },
+      { nivel: 3, theme: 'natureza', word: 'montanhas', tips: [
+        { id: 'BqcPaEU4Em4zNZmfhcQM', nameTips: 'preservação da fauna e flora' }
+      ] },
+      { nivel: 3, theme: 'restaurante', word: 'mcdonalds', tips: [
+        { id: '8sQucowXfa0WTFCG3qb3', nameTips: 'fastfood' }
+      ] },
+      { nivel: 2, theme: 'restaurante', word: 'habibs', tips: [
+        { id: 'nysBbXgYGK1POrujoiWt', nameTips: 'fastfood' }
+      ] },
+      { nivel: 3, theme: 'restaurante', word: 'sal grosso', tips: [
+        { id: 'Sph2CNBFMybgtrH7nL9R', nameTips: 'chef henrique fogaça' }
+      ] },
+      { nivel: 1, theme: 'saúde', word: 'sono', tips: [
+        { id: 'Z0V7yasNE6dVT002YfZN', nameTips: 'importância para o bem-estar físico e mental' }
+      ] },
+      { nivel: 3, theme: 'saúde', word: 'alimentação', tips: [
+        { id: 'cslMCYj3bL4PR22CVztG', nameTips: 'nutrientes essenciais para a saúde' }
+      ] },
+      { nivel: 3, theme: 'saúde', word: 'exercício', tips: [
+        { id: '9NAMler7Kb1wfywmAWwN', nameTips: 'fortalecimento muscular e cardiovascular' }
+      ] },
+      { nivel: 2, theme: 'saúde', word: 'higiene', tips: [
+        { id: 'VDtQnkZpx6OcnFCDdeOH', nameTips: 'prevenção de doenças infecciosas' }
+      ] },
+      { nivel: 1, theme: 'animais', word: 'leão', tips: [
+        { id: 'uAFlvDK2eOaEqjEB7eCb', nameTips: 'mamífero da família dos felinos' }
+      ] },
+      { nivel: 3, theme: 'animais', word: 'elefante', tips: [
+        { id: 'O8ezcLGU9kbaHGDX5XQe', nameTips: 'maior animal terrestre' }
+      ] }
+    ];
+
+    const nivel  = 3
+    let premio = 0
+    
+
+    if(nivel === 1){
+      premio = 100
+    }else if(nivel === 2){
+      premio = 250
+    }else if(nivel === 3){
+      premio = 500
+    }
+
+    const palavrasNivelDesejado = arrayObj.filter(word => word.nivel === nivel);
     const randomWord = palavrasNivelDesejado[Math.floor(Math.random() * palavrasNivelDesejado.length)];
-    console.log(randomWord)
-
     const dWord = randomWord.word.toUpperCase().replace(/\s/g, '').normalize('NFD').replace(/[\u0300-\u0366\u0368-\u036F]/g, '');
-    
     const dTheme = randomWord.theme.toUpperCase()
     const dTips =  randomWord.tips[0].nameTips
     
-
-    console.log(dWord)
-
+    console.log(dWord,dTheme,dTips )
+    
     // Define o tema, palavra e dica no HTML
     themeElement.textContent = "Tema: " + dTheme;
 
@@ -40,10 +88,6 @@ showLoading();
     
     // Inicializa a palavra oculta com underscores
     let hiddenWord = Array(wordLetters.length).fill(" ");
-    
-
-    console.log(hiddenWord)
-    
 
     function drawHiddenWord() {
       hiddenWordElement.innerHTML = ""; // Limpa o conteúdo anterior
@@ -98,7 +142,7 @@ showLoading();
       if (!hiddenWord.includes(" ")) {
         //alert("Parabéns! Você venceu!");
         showModalWin()
-        verificarEAtualizarMoedas(250)
+        verificarEAtualizarMoedas(premio)
         stopTimer()
         
         //location.reload();
@@ -114,7 +158,7 @@ showLoading();
         if (bodyParts === maxBodyParts) {
           
           showModalLoser()
-          verificarEAtualizarMoedas(-100)
+          //verificarEAtualizarMoedas(-100)
         
         } else {
           //alert("Letra incorreta. Tente novamente.");
@@ -138,17 +182,11 @@ showLoading();
     }
 
 
-    setTimeout(() =>{
-      hideLoading();
-    }, 1000)
-    
-    startTimer()
-
     //controle dos falicitadores dentro do jogo
     const facilitador1 = document.getElementById('facilitador1')
     const facilitador2 = document.getElementById('facilitador2')
     const facilitador3 = document.getElementById('facilitador3')
-
+    const facilitador4 = document.getElementById("facilitador4")
     
   
     facilitador1.addEventListener("click", function() {
@@ -265,21 +303,18 @@ showLoading();
       }
     });
 
-
-          //facilitador - dica
-      const facilitador4 = document.getElementById("facilitador4")
-      const btnDicaDiv = document.getElementById("btnDica")
-      const textDica = document.getElementById("textDica")
-
+    const btnDicaDiv = document.getElementById("btnDica")
+    const textDica = document.getElementById("textDica")
 
       facilitador4.addEventListener("click", function() {
         const valorfacilitador1 = 20
-  
+        
+
         if(moedasPerfil.textContent >= valorfacilitador1){
   
           verificarEAtualizarMoedas(-valorfacilitador1)
-        
-          facilitadorDica()
+          btnDicaDiv.classList.add("hide")
+          textDica.classList.remove("hide")
         }else{
           showModalMsg("Você não tem moedas suficientes. Aqui")
         }
@@ -290,10 +325,9 @@ showLoading();
         
       });
 
-      function facilitadorDica(){
-        btnDicaDiv.classList.add("hide")
-        textDica.classList.remove("hide")
-      }
+
+      
+
 
 
     const btnArricar = document.getElementById("enviarArricar")
@@ -305,12 +339,12 @@ showLoading();
         if (inputArriscar === dWord) {
           closeModalArriscar()
           showModalWin("Parabéns, você acertou a palavra!")
-          verificarEAtualizarMoedas(250)
+          verificarEAtualizarMoedas(premio)
           stopTimer()
         } else {
           closeModalArriscar()
           showModalLoser("Você errou a palavra! A palavra correta era " + dWord)
-          verificarEAtualizarMoedas(-100)
+          //verificarEAtualizarMoedas(-100)
         }
       } else {
         // Caso o input esteja em branco ou nulo
@@ -320,9 +354,6 @@ showLoading();
 
    
     //função dos segundos
-
-    
-
     function startTimer() {
       clearInterval(countdownInterval)
       countdown = 20
@@ -352,22 +383,15 @@ showLoading();
             console.log(bodyParts, maxBodyParts)
           }else if (bodyParts === (maxBodyParts-1)){
             showModalLoser("Você perdeu, seu tempo acabou!")
-            verificarEAtualizarMoedas(-100)
+            //verificarEAtualizarMoedas(-100)
           }
         }
       }, 1000)
     }
-
+    //função para parar o timer
     function stopTimer() {
       clearInterval(countdownInterval)
     }
-
-    })
-    .catch((error) => {
-      console.error("Erro ao buscar palavras: ", error)
-      hideLoading()
-    });
- 
 
 
   // Função para desenhar uma parte do corpo do boneco na forca
@@ -380,40 +404,19 @@ showLoading();
   }
 
 
-
-  // Função para reiniciar o jogo/pagina
-  function restartGame() {
-    location.reload();
-  }
-
 //botão sair  
   const btnSair = document.getElementById('sair')
   btnSair.addEventListener('click', function(){
-    sair()
+    window.location.href = "index.html";
   })
 
-  function sair(){
-    window.location.href = "index.html";
-  }
-
   const roundPlayer = document.getElementById('roundPlayer');
-
   roundPlayer.innerHTML = "Player 1 jogando..."
-
-
-
-
-
-
-
-
 
 // informaçoes do perfil do jogador
 
-
   const moedasPerfil = document.getElementById('moedas')
   const dPlayer1 = document.getElementById('dPlayer1')
-
 
     firebase.auth().onAuthStateChanged((user) => {
       const uid = user.uid;
@@ -421,18 +424,18 @@ showLoading();
           usersRef.doc(uid).get()
           .then((doc) => {
             if (doc.exists) {
-              
-              
+            
               const data = doc.data();
               const nome = data.name;
               const moedas = data.money;
               const partidasGanhas = data.partidasGanhas;
               const partidasPerdidas = data.partidasPerdidas
-              
-              
 
               moedasPerfil.innerHTML = moedas
               dPlayer1.innerHTML = "Player 1 - " + nome
+              setTimeout(() =>{
+                hideLoading();
+              }, 1000)
 
             } else {
               // o documento do usuário não existe
@@ -446,7 +449,7 @@ showLoading();
   
     });
 
-
+//função para atualizar o valor das moedas
     function verificarEAtualizarMoedas(quantidadeMoedas) {
       const uid = firebase.auth().currentUser.uid;
     
@@ -493,9 +496,6 @@ showLoading();
     }
 
 
-  
-
-
 //tooltip do botões
 
     const tooltipButtons = document.querySelectorAll('.tooltip-button');
@@ -529,8 +529,6 @@ showLoading();
     }
 
 
-
-
 //bloquea teclado
     const keyboard = document.getElementById("keyboard");
 
@@ -544,8 +542,6 @@ showLoading();
       keyboard.style.filter = "none";
     }
     
-
-
 // controle dos modals
 
 const modalWin = document.getElementById('modal-win')
@@ -595,15 +591,11 @@ fecharModalLoser.addEventListener("click", function(){
   window.location.href = "niveis.html";
 })
 
-
-
-
-
-const facilitador5Btn = document.getElementById("facilitador5")
+const facilitador5 = document.getElementById("facilitador5")
 const modalArriscar = document.getElementById('modal-arriscar')
 const btnCloseModal = document.getElementById('closeModal')
 
-facilitador5Btn.addEventListener("click", function() {
+facilitador5.addEventListener("click", function() {
   modalArriscar.classList.remove('hide')
 });
 

@@ -5,7 +5,9 @@ const btnFacil = document.getElementById('btnFacil')
 const btnMedio = document.getElementById('btnMedio')
 const btnDificil = document.getElementById('btnDificil')
 
-const moedasPefil = document.getElementById('moedasPefil')
+const btnVoltar = document.getElementById('btnVoltar')
+
+const moedasPerfil = document.getElementById('moedasPefil')
 
 showLoading()
 firebase.auth().onAuthStateChanged((user) => {
@@ -18,7 +20,7 @@ firebase.auth().onAuthStateChanged((user) => {
             const data = doc.data();
             const moedas = data.money;
             
-            moedasPefil.innerHTML = moedas
+            moedasPerfil.innerHTML = moedas
             hideLoading()
             
           } else {
@@ -30,31 +32,35 @@ firebase.auth().onAuthStateChanged((user) => {
           console.log("Erro ao recuperar informações do usuário: ", error);
         });
     }
-
   });
 
-
-function voltar(){
+  btnVoltar.addEventListener("click", ()=>{
     window.location.href = "index.html";
-}
-
-
-
+  })
 
 btnFacil.addEventListener('click' , ()=>{
- 
-    
-    window.location.href = "match.html";
+    if(moedasPerfil.textContent >= 50){
+      window.location.href = "match.html";
+    }else{
+      alert("Você não tem moedas suficientes, valor da aposta de 50 moedas")
+    }
+
   })
 
   btnMedio.addEventListener('click' , ()=>{
-    
-    window.location.href = "match.html";
+    if(moedasPerfil.textContent >= 125){
+      window.location.href = "match.html";
+    }else{
+      alert("Você não tem moedas suficientes, valor da aposta de 125 moedas")
+    }
   })
 
   btnDificil.addEventListener('click' , ()=>{
-
-    window.location.href = "match.html";
+    if(moedasPerfil.textContent >= 250){
+      window.location.href = "match.html";
+    }else{
+      alert("Você não tem moedas suficientes, valor da aposta de 250 moedas")
+    }
   })
 
   

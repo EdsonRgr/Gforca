@@ -43,6 +43,7 @@ function fetchWordsWithTips() {
         });
         
         return Promise.all(wordPromises);
+
         
       });
 
@@ -51,3 +52,7 @@ function fetchWordsWithTips() {
     return Promise.all(promises);
   });
 }
+
+// fetchWordsWithTips().then(()=>{
+//   console.log(wordsWithTips)
+// })
